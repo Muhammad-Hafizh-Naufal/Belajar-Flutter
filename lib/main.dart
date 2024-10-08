@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/sample_container.dart';
+// import 'package:myapp/widgets/sample_container.dart';
 // import './heading.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // untuk menghilangkan banner debug
       title: 'ngetes',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
     );
@@ -26,34 +26,52 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // membuat bagian header
       appBar: AppBar(
         title: Text('Belajar Widgets'),
+
+        // Membuat widget tombol search
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              print('Test');
+            },
+          ),
+        ],
+
+        // Membuat widget tombol menu
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            print('Test');
+          },
+        ),
       ),
-      body: SampleContainer(),
+      // membuat bagian body
+      body: Container(
+        color: Color.fromARGB(255, 0, 137, 172),
+        child: Center(
+          child: Text('Sunda Empire'),
+        ),
+      ),
+
+      // membuat tombol melayang
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+        ),
+        onPressed: () {},
+      ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // // Heading StatelessWidget
 // class Heading extends StatelessWidget {
