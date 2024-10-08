@@ -56,9 +56,24 @@ class MyHomePage extends StatelessWidget {
       ),
       // membuat bagian body
       body: Container(
-        color: Color.fromARGB(255, 0, 137, 172),
+        width: 200,
+        height: 200,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white, // warna background
+          border: Border.all(color: Colors.black, width: 1), // tau bordr kan
+          borderRadius: BorderRadius.circular(10), // untuk membuat sudut
+          // shape: BoxShape.circle, // better make ini jika ingin bentuk lingkaran
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black, offset: Offset(3, 6), blurRadius: 10),
+          ],
+        ),
         child: Center(
-          child: Text('Sunda Empire'),
+          child: Text(
+            'Avatar',
+            style: TextStyle(fontSize: 30, color: Colors.black),
+          ),
         ),
       ),
 
