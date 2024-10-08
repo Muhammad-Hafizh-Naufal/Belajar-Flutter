@@ -54,27 +54,27 @@ class MyHomePage extends StatelessWidget {
           },
         ),
       ),
+
       // membuat bagian body
-      body: Container(
-        width: 200,
-        height: 200,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white, // warna background
-          border: Border.all(color: Colors.black, width: 1), // tau bordr kan
-          borderRadius: BorderRadius.circular(10), // untuk membuat sudut
-          // shape: BoxShape.circle, // better make ini jika ingin bentuk lingkaran
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black, offset: Offset(3, 6), blurRadius: 10),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            'Avatar',
-            style: TextStyle(fontSize: 30, color: Colors.black),
+      body:
+          // Row(
+          //   mainAxisAlignment:
+          //       MainAxisAlignment.spaceEvenly, // Spasi merata antar widget
+          //   children: const <Widget>[
+          //     Icon(Icons.share),
+          //     Icon(Icons.thumb_up),
+          //     Icon(Icons.thumb_down),
+          //   ],
+          // ),
+
+          Column(
+        children: <Widget>[
+          Text(
+            'Sunda Empire',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-        ),
+          Text('Kerajaan Sunda pada jaman dahulu'),
+        ],
       ),
 
       // membuat tombol melayang
