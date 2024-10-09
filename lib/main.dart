@@ -7,16 +7,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // MaterialApp adalah widget utama yang menyediakan tema dan routing aplikasi
     return MaterialApp(
-      debugShowCheckedModeBanner:
-          false, // Menghilangkan banner debug di sudut kanan atas
+      debugShowCheckedModeBanner: false, // Menghilangkan banner debug
       title: 'ngetes', // Judul aplikasi
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Tema utama aplikasi dengan warna biru
+        primarySwatch: Colors.blue, // Mengatur warna tema aplikasi
       ),
-      home:
-          const MyHomePage(), // Menampilkan halaman utama (MyHomePage) saat aplikasi dijalankan
+      home: const MyHomePage(), // Menampilkan halaman utama
     );
   }
 }
@@ -26,65 +23,95 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() =>
-      _MyHomePageState(); // Menghubungkan ke state yang akan mengelola data dan UI
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 // State dari MyHomePage yang mengelola interaksi dan perubahan state
 class _MyHomePageState extends State<MyHomePage> {
-  bool lightOn =
-      false; // Variabel untuk menyimpan status Switch (nyala atau mati)
+  String? language; // Variabel untuk menyimpan pilihan bahasa
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur dasar halaman seperti AppBar dan body
     return Scaffold(
       appBar: AppBar(
         title: Text('Belajar Widgets'), // Judul pada bagian AppBar
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.search, // Icon untuk tombol pencarian
-              color: Colors.black, // Warna hitam untuk icon
+              Icons.search,
+              color: Colors.black,
             ),
             onPressed: () {
-              print(
-                  'Test'); // Aksi ketika tombol search ditekan, hanya menampilkan teks di console
+              print('Test'); // Aksi saat tombol pencarian ditekan
             },
           ),
         ],
         leading: IconButton(
           icon: Icon(
-            Icons.menu, // Icon untuk tombol menu
-            color: Colors.black, // Warna hitam untuk icon menu
+            Icons.menu,
+            color: Colors.black,
           ),
           onPressed: () {
-            print(
-                'Test'); // Aksi ketika tombol menu ditekan, hanya menampilkan teks di console
+            print('Test'); // Aksi saat tombol menu ditekan
           },
         ),
       ),
-      // Bagian body menggunakan widget Switch untuk menyalakan dan mematikan lampu (boolean lightOn)
-      body: Switch(
-        value:
-            lightOn, // Menentukan apakah Switch dalam kondisi menyala atau tidak (true/false)
-        onChanged: (bool value) {
-          // Aksi yang terjadi ketika Switch dinyalakan atau dimatikan
-          setState(() {
-            lightOn = value; // Memperbarui status Switch dengan nilai yang baru
-          });
-
-          // Menampilkan pesan di bagian bawah layar menggunakan SnackBar setiap kali Switch berubah
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(lightOn
-                  ? 'Light On'
-                  : 'Light Off'), // Pesan yang ditampilkan, tergantung status Switch
-              duration:
-                  Duration(seconds: 1), // Durasi SnackBar muncul selama 1 detik
+      // Bagian body menggunakan Padding agar konten tidak terlalu menempel dengan tepi layar
+      body: Column(
+        mainAxisSize:
+            MainAxisSize.min, // Menyesuaikan ukuran kolom sesuai kebutuhan
+        children: [
+          ListTile(
+            title: Text('Dart'), // Menambahkan judul untuk Radio button
+            leading: Radio(
+              value: 'Dart', // Nilai yang akan disimpan saat dipilih
+              groupValue: language, // Nilai saat ini dari group radio
+              onChanged: (String? value) {
+                setState(() {
+                  language = value; // Mengupdate nilai language saat dipilih
+                  showSnackBar(); // Menampilkan SnackBar
+                });
+              },
             ),
-          );
-        },
+          ),
+          ListTile(
+            title: Text('Kotlin'), // Menambahkan judul untuk Radio button
+            leading: Radio(
+              value: 'Kotlin', // Nilai yang akan disimpan saat dipilih
+              groupValue: language, // Nilai saat ini dari group radio
+              onChanged: (String? value) {
+                setState(() {
+                  language = value; // Mengupdate nilai language saat dipilih
+                  showSnackBar(); // Menampilkan SnackBar
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: Text('Swift'), // Menambahkan judul untuk Radio button
+            leading: Radio(
+              value: 'Swift', // Nilai yang akan disimpan saat dipilih
+              groupValue: language, // Nilai saat ini dari group radio
+              onChanged: (String? value) {
+                setState(() {
+                  language = value; // Mengupdate nilai language saat dipilih
+                  showSnackBar(); // Menampilkan SnackBar
+                });
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showSnackBar() {
+    // Menampilkan SnackBar dengan pesan pilihan bahasa
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(language ??
+            'No Language Selected'), // Menampilkan pesan sesuai pilihan
+        duration: Duration(seconds: 1), // Durasi SnackBar muncul selama 1 detik
       ),
     );
   }
