@@ -7,98 +7,84 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // MaterialApp adalah widget utama yang menyediakan tema dan routing aplikasi
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ngetes',
+      debugShowCheckedModeBanner:
+          false, // Menghilangkan banner debug di sudut kanan atas
+      title: 'ngetes', // Judul aplikasi
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue, // Tema utama aplikasi dengan warna biru
       ),
-      home: const MyHomePage(),
+      home:
+          const MyHomePage(), // Menampilkan halaman utama (MyHomePage) saat aplikasi dijalankan
     );
   }
 }
 
-// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input penggunas
+// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input pengguna
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() =>
+      _MyHomePageState(); // Menghubungkan ke state yang akan mengelola data dan UI
 }
 
 // State dari MyHomePage yang mengelola interaksi dan perubahan state
 class _MyHomePageState extends State<MyHomePage> {
-  String _name = '';
+  bool lightOn =
+      false; // Variabel untuk menyimpan status Switch (nyala atau mati)
 
   @override
   Widget build(BuildContext context) {
+    // Scaffold menyediakan struktur dasar halaman seperti AppBar dan body
     return Scaffold(
       appBar: AppBar(
         title: Text('Belajar Widgets'), // Judul pada bagian AppBar
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.search,
-              color: Colors.black,
+              Icons.search, // Icon untuk tombol pencarian
+              color: Colors.black, // Warna hitam untuk icon
             ),
             onPressed: () {
-              print('Test');
+              print(
+                  'Test'); // Aksi ketika tombol search ditekan, hanya menampilkan teks di console
             },
           ),
         ],
         leading: IconButton(
           icon: Icon(
-            Icons.menu,
-            color: Colors.black,
+            Icons.menu, // Icon untuk tombol menu
+            color: Colors.black, // Warna hitam untuk icon menu
           ),
           onPressed: () {
-            print('Test');
+            print(
+                'Test'); // Aksi ketika tombol menu ditekan, hanya menampilkan teks di console
           },
         ),
       ),
-      // Bagian body menggunakan Padding agar konten tidak terlalu menempel dengan tepi layar
-      body: Padding(
-        padding:
-            EdgeInsets.all(16), // Memberikan padding 16 di seluruh sisi body
-        child: Column(
-          children: [
-            // Menampilkan teks "Input Widgets" sebagai header bagian input
-            Text(
-              'Input Widgets',
-              style: TextStyle(fontSize: 20), // Ukuran font teks header
+      // Bagian body menggunakan widget Switch untuk menyalakan dan mematikan lampu (boolean lightOn)
+      body: Switch(
+        value:
+            lightOn, // Menentukan apakah Switch dalam kondisi menyala atau tidak (true/false)
+        onChanged: (bool value) {
+          // Aksi yang terjadi ketika Switch dinyalakan atau dimatikan
+          setState(() {
+            lightOn = value; // Memperbarui status Switch dengan nilai yang baru
+          });
+
+          // Menampilkan pesan di bagian bawah layar menggunakan SnackBar setiap kali Switch berubah
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(lightOn
+                  ? 'Light On'
+                  : 'Light Off'), // Pesan yang ditampilkan, tergantung status Switch
+              duration:
+                  Duration(seconds: 1), // Durasi SnackBar muncul selama 1 detik
             ),
-            // TextField digunakan untuk input teks dari pengguna
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Write Your Name here..', // Petunjuk input
-                labelText: 'Your Name', // Label input
-              ),
-              onChanged: (String value) {
-                // Fungsi yang dipanggil saat pengguna mengetikkan sesuatu
-                setState(() {
-                  _name =
-                      value; // Memperbarui variabel _name dengan input dari pengguna
-                });
-              },
-            ),
-            SizedBox(height: 20), // Jarak antara TextField dengan tombol
-            ElevatedButton(
-              onPressed: () {
-                // Fungsi saat tombol Submit ditekan
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      // Menampilkan dialog dengan pesan
-                      return AlertDialog(
-                        content: Text(
-                            'Hello $_name'), // Menampilkan nama yang diinputkan
-                      );
-                    });
-              },
-              child: Text('Submit'), // Teks pada tombol
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
