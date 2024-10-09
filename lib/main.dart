@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp()); // Fungsi utama untuk menjalankan aplikasi
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input penggunas
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -25,14 +26,15 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+// State dari MyHomePage yang mengelola interaksi dan perubahan state
 class _MyHomePageState extends State<MyHomePage> {
-  String? language; // Tambahkan variabel language
+  String _name = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Belajar Widgets'),
+        title: Text('Belajar Widgets'), // Judul pada bagian AppBar
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -54,56 +56,46 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ),
-      body: Center(
+      // Bagian body menggunakan Padding agar konten tidak terlalu menempel dengan tepi layar
+      body: Padding(
+        padding:
+            EdgeInsets.all(16), // Memberikan padding 16 di seluruh sisi body
         child: Column(
-          children: <Widget>[
+          children: [
+            // Menampilkan teks "Input Widgets" sebagai header bagian input
             Text(
-              'Button',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Input Widgets',
+              style: TextStyle(fontSize: 20), // Ukuran font teks header
             ),
-            Text('Kali ini mempelajari widget button'),
-            ElevatedButton(
-              child: Text('Ini ElevatedButton'),
-              onPressed: () {},
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text('Ini TextButton'),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('OutlinedButton'),
-            ),
-            IconButton(
-              icon: Icon(Icons.volume_up),
-              tooltip: 'Increase volume',
-              onPressed: () {},
-            ),
-            Text('Ini IconButton'),
-
-            // Membuat DropdownButton yang benar
-            DropdownButton<String>(
-              items: [
-                DropdownMenuItem<String>(
-                  value: 'Dart',
-                  child: Text('Dart'),
-                ),
-                DropdownMenuItem<String>(
-                  value: 'Flutter',
-                  child: Text('Flutter'),
-                ),
-                DropdownMenuItem<String>(
-                  value: 'Kotlin',
-                  child: Text('Kotlin'),
-                ),
-              ],
-              value: language,
-              hint: Text('Select Language'),
-              onChanged: (value) {
+            // TextField digunakan untuk input teks dari pengguna
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Write Your Name here..', // Petunjuk input
+                labelText: 'Your Name', // Label input
+              ),
+              onChanged: (String value) {
+                // Fungsi yang dipanggil saat pengguna mengetikkan sesuatu
                 setState(() {
-                  language = value; // Update pilihan
+                  _name =
+                      value; // Memperbarui variabel _name dengan input dari pengguna
                 });
               },
+            ),
+            SizedBox(height: 20), // Jarak antara TextField dengan tombol
+            ElevatedButton(
+              onPressed: () {
+                // Fungsi saat tombol Submit ditekan
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      // Menampilkan dialog dengan pesan
+                      return AlertDialog(
+                        content: Text(
+                            'Hello $_name'), // Menampilkan nama yang diinputkan
+                      );
+                    });
+              },
+              child: Text('Submit'), // Teks pada tombol
             ),
           ],
         ),
