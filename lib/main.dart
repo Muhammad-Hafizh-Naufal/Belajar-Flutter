@@ -1,77 +1,92 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // Mengimpor paket Material untuk menggunakan widget dan tema Material Design.
 
-// Fungsi utama untuk menjalankan aplikasi
 void main() {
-  runApp(MyApp());
+  runApp(
+      MyApp()); // Fungsi utama untuk menjalankan aplikasi dengan MyApp sebagai root widget.
 }
 
-// Kelas MyApp yang merupakan StatelessWidget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:
-          false, // Menghilangkan banner debug di sudut kanan atas
-      title: 'ngetes', // Judul aplikasi
+          false, // Menyembunyikan banner debug di aplikasi.
+      title: 'ngetes', // Judul aplikasi.
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Mengatur warna tema aplikasi menjadi biru
+        primarySwatch: Colors.blue, // Menentukan warna tema utama aplikasi.
       ),
-      home: const MyHomePage(), // Menampilkan halaman utama
+      home:
+          const MyHomePage(), // Menetapkan MyHomePage sebagai halaman utama aplikasi.
     );
   }
 }
 
-// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input pengguna
+// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input pengguna.
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key})
+      : super(key: key); // Konstruktor untuk MyHomePage.
 
   @override
   _MyHomePageState createState() =>
-      _MyHomePageState(); // Membuat state dari MyHomePage
+      _MyHomePageState(); // Mengaitkan dengan state-nya.
 }
 
-// State dari MyHomePage yang mengelola interaksi dan perubahan state
+// State dari MyHomePage yang mengelola interaksi dan perubahan state.
 class _MyHomePageState extends State<MyHomePage> {
-  bool agree = false; // Variabel untuk menyimpan status checkbox
+  bool agree = false; // Variabel untuk menyimpan status checkbox.
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Belajar Widgets'), // Judul pada bagian AppBar
+        title: Text('Belajar Widgets'), // Judul pada bagian AppBar.
         actions: <Widget>[
+          // Widget aksi di bagian AppBar.
           IconButton(
             icon: Icon(
-              Icons.search, // Ikon pencarian
-              color: Colors.black, // Warna ikon
+              Icons.search, // Ikon untuk tombol pencarian.
+              color: Colors.black, // Warna ikon.
             ),
             onPressed: () {
-              print('Test'); // Aksi saat tombol pencarian ditekan
+              // Fungsi saat tombol ditekan.
+              print('Test'); // Mengeluarkan 'Test' ke konsol.
             },
           ),
         ],
         leading: IconButton(
           icon: Icon(
-            Icons.menu, // Ikon menu
-            color: Colors.black, // Warna ikon
+            Icons.menu, // Ikon untuk tombol menu.
+            color: Colors.black, // Warna ikon.
           ),
           onPressed: () {
-            print('Test'); // Aksi saat tombol menu ditekan
+            // Fungsi saat tombol ditekan.
+            print('Test'); // Mengeluarkan 'Test' ke konsol.
           },
         ),
       ),
-      // Bagian body menggunakan ListTile untuk menampilkan checkbox
-      body: ListTile(
-        leading: Checkbox(
-          value: agree, // Mengatur nilai checkbox berdasarkan variabel agree
-          onChanged: (bool? value) {
-            setState(() {
-              agree = value!; // Mengupdate nilai agree saat checkbox diubah
-            });
-          },
+      body: Center(
+        // Mengatur isi body untuk berada di tengah layar.
+        child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Mengatur alignment kolom ke tengah.
+          children: [
+            Text(
+                'Ini mengunakan Url'), // Teks untuk menjelaskan gambar yang diambil dari URL.
+            Image.network(
+              // Widget untuk menampilkan gambar dari URL.
+              'https://c4.wallpaperflare.com/wallpaper/108/140/869/digital-digital-art-artwork-fantasy-art-drawing-hd-wallpaper-thumb.jpg',
+              width: 200, // Menentukan lebar gambar.
+            ),
+            SizedBox(height: 20), // Menambahkan jarak vertikal antara elemen.
+            Text(
+                'Ini mengunakan lokal'), // Teks untuk menjelaskan gambar yang diambil dari aset lokal.
+            Image.asset(
+              // Widget untuk menampilkan gambar dari aset lokal.
+              'images/black-white-background 1.jpg',
+              width: 200, // Menentukan lebar gambar.
+            ),
+          ],
         ),
-        title: Text(
-            'Saya menyetujui syarat dan ketentuan yang berlaku'), // Teks yang ditampilkan di samping checkbox
       ),
     );
   }
