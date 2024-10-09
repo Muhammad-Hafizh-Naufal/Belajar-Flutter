@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
+// Fungsi utama untuk menjalankan aplikasi
 void main() {
-  runApp(MyApp()); // Fungsi utama untuk menjalankan aplikasi
+  runApp(MyApp());
 }
 
+// Kelas MyApp yang merupakan StatelessWidget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Menghilangkan banner debug
+      debugShowCheckedModeBanner:
+          false, // Menghilangkan banner debug di sudut kanan atas
       title: 'ngetes', // Judul aplikasi
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Mengatur warna tema aplikasi
+        primarySwatch: Colors.blue, // Mengatur warna tema aplikasi menjadi biru
       ),
       home: const MyHomePage(), // Menampilkan halaman utama
     );
@@ -23,12 +26,13 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() =>
+      _MyHomePageState(); // Membuat state dari MyHomePage
 }
 
 // State dari MyHomePage yang mengelola interaksi dan perubahan state
 class _MyHomePageState extends State<MyHomePage> {
-  String? language; // Variabel untuk menyimpan pilihan bahasa
+  bool agree = false; // Variabel untuk menyimpan status checkbox
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.search,
-              color: Colors.black,
+              Icons.search, // Ikon pencarian
+              color: Colors.black, // Warna ikon
             ),
             onPressed: () {
               print('Test'); // Aksi saat tombol pencarian ditekan
@@ -48,70 +52,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         leading: IconButton(
           icon: Icon(
-            Icons.menu,
-            color: Colors.black,
+            Icons.menu, // Ikon menu
+            color: Colors.black, // Warna ikon
           ),
           onPressed: () {
             print('Test'); // Aksi saat tombol menu ditekan
           },
         ),
       ),
-      // Bagian body menggunakan Padding agar konten tidak terlalu menempel dengan tepi layar
-      body: Column(
-        mainAxisSize:
-            MainAxisSize.min, // Menyesuaikan ukuran kolom sesuai kebutuhan
-        children: [
-          ListTile(
-            title: Text('Dart'), // Menambahkan judul untuk Radio button
-            leading: Radio(
-              value: 'Dart', // Nilai yang akan disimpan saat dipilih
-              groupValue: language, // Nilai saat ini dari group radio
-              onChanged: (String? value) {
-                setState(() {
-                  language = value; // Mengupdate nilai language saat dipilih
-                  showSnackBar(); // Menampilkan SnackBar
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('Kotlin'), // Menambahkan judul untuk Radio button
-            leading: Radio(
-              value: 'Kotlin', // Nilai yang akan disimpan saat dipilih
-              groupValue: language, // Nilai saat ini dari group radio
-              onChanged: (String? value) {
-                setState(() {
-                  language = value; // Mengupdate nilai language saat dipilih
-                  showSnackBar(); // Menampilkan SnackBar
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('Swift'), // Menambahkan judul untuk Radio button
-            leading: Radio(
-              value: 'Swift', // Nilai yang akan disimpan saat dipilih
-              groupValue: language, // Nilai saat ini dari group radio
-              onChanged: (String? value) {
-                setState(() {
-                  language = value; // Mengupdate nilai language saat dipilih
-                  showSnackBar(); // Menampilkan SnackBar
-                });
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void showSnackBar() {
-    // Menampilkan SnackBar dengan pesan pilihan bahasa
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(language ??
-            'No Language Selected'), // Menampilkan pesan sesuai pilihan
-        duration: Duration(seconds: 1), // Durasi SnackBar muncul selama 1 detik
+      // Bagian body menggunakan ListTile untuk menampilkan checkbox
+      body: ListTile(
+        leading: Checkbox(
+          value: agree, // Mengatur nilai checkbox berdasarkan variabel agree
+          onChanged: (bool? value) {
+            setState(() {
+              agree = value!; // Mengupdate nilai agree saat checkbox diubah
+            });
+          },
+        ),
+        title: Text(
+            'Saya menyetujui syarat dan ketentuan yang berlaku'), // Teks yang ditampilkan di samping checkbox
       ),
     );
   }
