@@ -1,90 +1,89 @@
-import 'package:flutter/material.dart'; // Mengimpor paket Material untuk menggunakan widget dan tema Material Design.
+// Mengimpor package yang diperlukan
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+// Fungsi main adalah entry point aplikasi Flutter
 void main() {
-  runApp(
-      MyApp()); // Fungsi utama untuk menjalankan aplikasi dengan MyApp sebagai root widget.
+  runApp(const MyApp()); // Menjalankan aplikasi dengan widget root MyApp
 }
 
+// MyApp adalah widget root yang mengatur tema dan halaman awal aplikasi
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner:
-          false, // Menyembunyikan banner debug di aplikasi.
-      title: 'ngetes', // Judul aplikasi.
+      debugShowCheckedModeBanner: false, // Menyembunyikan banner debug
+      title: 'ngetes', // Judul aplikasi
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Menentukan warna tema utama aplikasi.
-      ),
-      home:
-          const MyHomePage(), // Menetapkan MyHomePage sebagai halaman utama aplikasi.
+          primarySwatch: Colors.blue, // Warna tema utama
+          // Mengatur tema teks default menggunakan Google Font
+          textTheme: GoogleFonts.oswaldTextTheme(
+            Theme.of(context).textTheme,
+          )),
+      home: const MyHomePage(), // Halaman utama aplikasi
     );
   }
 }
 
-// MyHomePage merupakan StatefulWidget karena ada interaksi dengan input pengguna.
+// MyHomePage adalah widget yang mewakili halaman utama aplikasi
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key})
-      : super(key: key); // Konstruktor untuk MyHomePage.
+  const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() =>
-      _MyHomePageState(); // Mengaitkan dengan state-nya.
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-// State dari MyHomePage yang mengelola interaksi dan perubahan state.
+// _MyHomePageState mengelola state dan UI untuk MyHomePage
 class _MyHomePageState extends State<MyHomePage> {
-  bool agree = false; // Variabel untuk menyimpan status checkbox.
+  bool agree = false; // State untuk checkbox
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Belajar Widgets'), // Judul pada bagian AppBar.
+        // Judul AppBar menggunakan Google Font Lato
+        title: Text('Belajar Widgets', style: GoogleFonts.lato()),
         actions: <Widget>[
-          // Widget aksi di bagian AppBar.
+          // Tombol pencarian di AppBar
           IconButton(
-            icon: Icon(
-              Icons.search, // Ikon untuk tombol pencarian.
-              color: Colors.black, // Warna ikon.
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
             ),
             onPressed: () {
-              // Fungsi saat tombol ditekan.
-              print('Test'); // Mengeluarkan 'Test' ke konsol.
+              print('Search pressed'); // Aksi ketika tombol pencarian ditekan
             },
           ),
         ],
+        // Tombol menu di sisi kiri AppBar
         leading: IconButton(
-          icon: Icon(
-            Icons.menu, // Ikon untuk tombol menu.
-            color: Colors.black, // Warna ikon.
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.black,
           ),
           onPressed: () {
-            // Fungsi saat tombol ditekan.
-            print('Test'); // Mengeluarkan 'Test' ke konsol.
+            print('Menu pressed'); // Aksi ketika tombol menu ditekan
           },
         ),
       ),
+      // Body aplikasi
       body: Center(
-        // Mengatur isi body untuk berada di tengah layar.
         child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center, // Mengatur alignment kolom ke tengah.
-          children: [
-            Text(
-                'Ini mengunakan Url'), // Teks untuk menjelaskan gambar yang diambil dari URL.
-            Image.network(
-              // Widget untuk menampilkan gambar dari URL.
-              'https://c4.wallpaperflare.com/wallpaper/108/140/869/digital-digital-art-artwork-fantasy-art-drawing-hd-wallpaper-thumb.jpg',
-              width: 200, // Menentukan lebar gambar.
-            ),
-            SizedBox(height: 20), // Menambahkan jarak vertikal antara elemen.
-            Text(
-                'Ini mengunakan lokal'), // Teks untuk menjelaskan gambar yang diambil dari aset lokal.
-            Image.asset(
-              // Widget untuk menampilkan gambar dari aset lokal.
-              'images/black-white-background 1.jpg',
-              width: 200, // Menentukan lebar gambar.
-            ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Teks selamat datang menggunakan Google Font
+            Text('Welcome to Flutter!',
+                style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                )),
+            const SizedBox(height: 20), // Spasi vertikal
+            // Checkbox dengan teks menggunakan Google Font Lato
+
+            const SizedBox(height: 20), // Spasi vertikal
+            // Tombol dengan teks menggunakan Google Font Poppins
           ],
         ),
       ),

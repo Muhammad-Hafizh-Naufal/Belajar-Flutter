@@ -4,7 +4,7 @@ class Heading extends StatelessWidget {
   final String text;
 
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:866322961.
-  const Heading({Key? key, required this.text}) : super(key: key);
+  const Heading({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
